@@ -69,41 +69,26 @@
         >
       </button>
       <button
-        class="penMode"
-        @click="
-          currentTool = 'paint-brush';
-          changePaint();
-        "
+        :class="{'text-success':currentTool=='paint-brush'}"        
+        @click="currentTool = 'paint-brush'; "
       >
         <i class="fas fa-pen" style="width: 100px">畫筆模式</i>
       </button>
       <button
-        class="highlighterMode"
-        @click="
-          currentTool = 'highlighter';
-          changeHighlighter();
-        "
+        :class="{'text-success':currentTool=='highlighter'}"        
+        @click="currentTool = 'highlighter'; "
       >
         <i class="fas fa-pen-alt" style="width: 100px">螢光筆模式</i>
       </button>
       <button
-        class="eraserMode"
+        :class="{'text-success':currentTool=='eraser'}"        
         @click="
           currentTool = 'eraser';
-          changeEraser();
         "
       >
         <i class="fas fa-eraser" style="width: 100px">橡皮擦</i>
       </button>
-      <button
-        class="squareMode"
-        @click="
-          currentTool = 'square';
-          changeSquare();
-        "
-      >
-        <i class="fas fa-square" style="width: 100px">方形框</i>
-      </button>
+
       <div class="page" style="color: white">
         {{ pageNum }}/{{ pageTotalNum }}
       </div>
@@ -247,21 +232,7 @@ export default {
     };
   },
   methods: {
-    // setCanvasTempPositionSquare(x,y){
-    //   this.tempPositionSquare={x,y}
-    // },
-    // setTempSquare() {
-    //   let ctx = this.canvasContext;
-    //   let canvas = ctx.canvas;
-    //   let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    //   this.tempSquare = tempSquare;
-    // },
-    // getCanvasMousePosition(offsetX, offsetY) {
-    //   let canvasPosition = this.canvasContext.canvas.getBoundingClientRect();
-    //   let x = offsetX - canvasPosition.x;
-    //   let y = offsetY - canvasPosition.y;
-    //   return { x, y };
-    // },
+
     aaa(){
       document.getElementById("boardHeader").style.display = "none";
     },
@@ -280,13 +251,7 @@ export default {
       let tempSquare = ctx.getImageData(0, 0, canvas.width, canvas.height);
       window.history.pushState(tempSquare, null);
     },
-    // setTempCanvas() {
-    //   let ctx = this.canvasContext;
-    //   let canvas = ctx.canvas;
-    //   let tempCanvas = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    //   this.tempCanvas = tempCanvas;
-    //   console.log(tempCanvas);
-    // },
+
     resetCanvas() {
       let canvas = this.canvasContext.canvas;
       this.canvasContext.clearRect(0, 0, canvas.width, canvas.height);
@@ -310,34 +275,7 @@ export default {
         );
       }
     },
-    changeHighlighter() {
-      this.currentTool = "highlighter";
-      document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "black";
-      document.querySelector(".highlighterMode").style.color = "green";
-    },
-    changePaint() {
-      this.currentTool = "paint-brush";
-      document.querySelector(".penMode").style.color = "green";
-      document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "black";
-      document.querySelector(".highlighterMode").style.color = "black";
-    },
-    changeEraser() {
-      this.currentTool = "eraser";
-      document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "green";
-      document.querySelector(".squareMode").style.color = "black";
-      document.querySelector(".highlighterMode").style.color = "black";
-    },
-    changeSquare() {
-      this.currentTool = "square";
-      document.querySelector(".penMode").style.color = "black";
-      document.querySelector(".eraserMode").style.color = "black";
-      document.querySelector(".squareMode").style.color = "green";
-      document.querySelector(".highlighterMode").style.color = "black";
-    },
+
     isColorActive(color) {
       return this.currentColor && color == this.currentColor.name
         ? " active"
@@ -467,12 +405,14 @@ export default {
       var page = this.pageNum;
       page = page > 1 ? page - 1 : this.pageTotalNum;
       this.pageNum = page;
+      this.resetCanvas()
     },
     // 下一頁函數
     nextPage() {
       var page = this.pageNum;
       page = page < this.pageTotalNum ? page + 1 : 1;
       this.pageNum = page;
+      this.resetCanvas()
     },
     // 其他的一些回調函數。
     pdfError(error) {
