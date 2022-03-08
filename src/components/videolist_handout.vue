@@ -67,6 +67,10 @@
         :src="setDatabase(item.directory, item.fileName)"
         style="width: 40px; height: 40px"
       />
+      <div class="circular" v-bind:style="{ backgroundImage: 'url(' + setDatabase(item.directory, item.fileName) + ')' }"></div>
+        
+      <!-- </div> -->
+      
     </div>
     <div class="col-2 p-1 div" @click="SelectThis(index, item.fileName)">
       <p>{{ item.fileName }}</p>
