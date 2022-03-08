@@ -68,7 +68,7 @@
         style="width: 40px; height: 40px"
       />
       <div class="circular" v-bind:style="{ backgroundImage: 'url(' + setDatabase(item.directory, item.fileName) + ')' }"></div>
-        
+       <!-- 測試img寫法  -->
       <!-- </div> -->
       
     </div>
