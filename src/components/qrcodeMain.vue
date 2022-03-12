@@ -1,6 +1,7 @@
 <template>
   <Header></Header>
   <Searchmodal v-on:sureMovie="emitMain"></Searchmodal>
+  <form action="">
   <div class="container" style="padding-bottom:12rem">
     <div class="row">
       <div class="col">
@@ -148,12 +149,13 @@
           刪除
         </button>
         <br />
-        <br />
-        <div class="btn btn-dark">送出</div>
+        <br />        
+          <input class="btn btn-dark" type="button" value="送出" v-on:click="onSubmit()">            
         </div>
       </div>
     </div>
   </div>
+  </form>
   <Footer></Footer>
 </template>
 <style>
@@ -216,6 +218,17 @@ export default {
     }
   },
   methods: {
+    onSubmit(){
+      let data1 = document.getElementsByTagName("input")[3].value
+      let data2 = document.getElementsByTagName("input")[4].value
+      const dataSend ={webUrl:data1,listName:data2}
+      console.log(this.products.length);
+      
+      JSON.stringify(dataSend);
+      console.log(JSON.stringify(dataSend));
+
+
+    },
     addlist() {
       this.products.push({
       });
