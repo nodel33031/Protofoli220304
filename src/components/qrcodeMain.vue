@@ -42,6 +42,7 @@
             type="text"
             placeholder="請輸入自訂名稱"
             v-model="webqrcode.imgUrl"
+            
           />
           <h2 class="py-3">播放清單名稱</h2>
           <input
@@ -94,6 +95,7 @@
                   type="text"
                   placeholder="順序"
                   :value="i + 1"
+                  @input="item.movieIndex=$event.target.value"
                 />
               </td>
               <td>
@@ -102,7 +104,8 @@
                   id="newVideoName1"
                   name="newVideoName1"
                   type="text"
-                  placeholder="請輸入影片名稱"
+                  placeholder="請輸入影片名稱"                  
+                  @input="item.movieName=$event.target.value"
                 />
               </td>
               <td>
@@ -111,7 +114,8 @@
                   id="newVideoName1"
                   name="newVideoName1"
                   type="text"
-                  placeholder="請輸入影片題目"
+                  placeholder="請輸入影片題目"                  
+                  @input="item.movieTitle=$event.target.value"
                 />
               </td>
               <td>
@@ -122,6 +126,7 @@
                   type="text"
                   placeholder="請搜尋影片ID"
                   :value="emitName[i]"
+                  @input="item.movieID=$event.target.value"
                 />
               </td>
               <td>
@@ -181,11 +186,15 @@ h2{
 import Header from "@/components/qrcodeHeader.vue";
 import Searchmodal from "@/components/qrcodeSearchmodal.vue";
 import Footer from "@/components/qrcodeFooter.vue";
-const products = [{}];
+// const products = [{index:"54",}];
 export default {
   data() {
     return {
-      products: [],
+      abQrcode:[{
+        listName:null,
+        imgUrl:null
+      }],
+      products: [{}],
       webqrcode: {
         imgUrl: "",
       },
@@ -198,7 +207,7 @@ export default {
     Footer
   },
   created() {
-    this.products = products;
+    // this.products = products;
     this.webqrcode.imgUrl = _uuid();
 
     function _uuid() {
@@ -221,26 +230,31 @@ export default {
   },
   methods: {
     onSubmit(){
-      let data1 = document.getElementsByTagName("input")[3].value
-      let data2 = document.getElementsByTagName("input")[4].value
-      const dataSend ={webUrl:data1,listName:data2}
-      console.log(this.products.length);
-      for(let i=5;i<5+this.products.length*4;i++){
-        const listData = document.getElementsByTagName("input")[i].value
-        // console.log(document.getElementsByTagName("input")[i].value);
-        const allListdata ={listData:listData}
-        // console.log(JSON.stringify(allListdata));
-        document.getElementsByName("Data1").value=JSON.stringify(allListdata)
-        console.log(document.getElementsByName("Data1").value);
+      // let data1 = document.getElementsByTagName("input")[3].value
+      // let data2 = document.getElementsByTagName("input")[4].value
+      // const dataSend ={webUrl:data1,listName:data2}
+      // console.log(this.products.length);
+      // for(let i=5;i<5+this.products.length*4;i++){
+      //   const listData = document.getElementsByTagName("input")[i].value
+      //   // console.log(document.getElementsByTagName("input")[i].value);
+      //   const allListdata ={listData:listData}
+      //   // console.log(JSON.stringify(allListdata));
+      //   document.getElementsByName("Data1").value=JSON.stringify(allListdata)
+      //   console.log(document.getElementsByName("Data1").value);
 
-      }
+      // }
       
-      document.getElementsByName("Data2").value=JSON.stringify(dataSend);
-      console.log(JSON.stringify(dataSend));
+      // document.getElementsByName("Data2").value=JSON.stringify(dataSend);
+      // console.log(JSON.stringify(dataSend));
+      // console.log(this.products[0].movieName);
+      this.abQrcode[0].imgUrl=document.getElementsByTagName("input")[3].value
+      this.abQrcode[0].listName=document.getElementsByTagName("input")[4].value
+      console.log(JSON.stringify(this.products));
+      console.log(JSON.stringify(this.abQrcode));
       
     },
     addlist() {
-      this.products.push({
+      this.products.push({movieIndex:1
       });
     },
     del() {
