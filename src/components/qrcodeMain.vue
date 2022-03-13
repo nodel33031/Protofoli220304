@@ -186,7 +186,7 @@ h2{
 import Header from "@/components/qrcodeHeader.vue";
 import Searchmodal from "@/components/qrcodeSearchmodal.vue";
 import Footer from "@/components/qrcodeFooter.vue";
-// const products = [{index:"54",}];
+const products = [{}];
 export default {
   data() {
     return {
@@ -207,7 +207,7 @@ export default {
     Footer
   },
   created() {
-    // this.products = products;
+    this.products = products;
     this.webqrcode.imgUrl = _uuid();
 
     function _uuid() {
@@ -254,7 +254,7 @@ export default {
       
     },
     addlist() {
-      this.products.push({movieIndex:1
+      this.products.push({
       });
     },
     del() {
