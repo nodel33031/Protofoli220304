@@ -150,7 +150,9 @@
         </button>
         <br />
         <br />        
-          <input class="btn btn-dark" type="button" value="送出" v-on:click="onSubmit()">            
+          <input class="btn btn-dark" type="button" value="送出" v-on:click="onSubmit()"> 
+          <input type="text" name="Data1" style="display:none">    
+          <input type="text" name="Data2" style="display:none">         
         </div>
       </div>
     </div>
@@ -223,11 +225,19 @@ export default {
       let data2 = document.getElementsByTagName("input")[4].value
       const dataSend ={webUrl:data1,listName:data2}
       console.log(this.products.length);
+      for(let i=5;i<5+this.products.length*4;i++){
+        const listData = document.getElementsByTagName("input")[i].value
+        // console.log(document.getElementsByTagName("input")[i].value);
+        const allListdata ={listData:listData}
+        // console.log(JSON.stringify(allListdata));
+        document.getElementsByName("Data1").value=JSON.stringify(allListdata)
+        console.log(document.getElementsByName("Data1").value);
+
+      }
       
-      JSON.stringify(dataSend);
+      document.getElementsByName("Data2").value=JSON.stringify(dataSend);
       console.log(JSON.stringify(dataSend));
-
-
+      
     },
     addlist() {
       this.products.push({
