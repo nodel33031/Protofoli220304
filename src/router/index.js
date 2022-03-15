@@ -2,6 +2,11 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
+    path:"/to/:id",
+    component:()=>
+      import("../components/videoPlayer.vue")
+  },
+  {
     path: "/videoHeader",
     name: "videoheader",
     component: () =>

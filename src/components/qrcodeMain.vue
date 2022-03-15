@@ -6,6 +6,7 @@
       <div class="row">
         <div class="col">
           <!-- Content here -->
+          <div>User {{ $route.params.id }}</div>
           <h2>選擇QR code網址產生方式</h2>
           <div class="radio d-flex pb-3">
             <div class="form-check pe-5 fs-3">
@@ -244,7 +245,7 @@ export default {
   methods: {
 
     onSubmit() {
-
+      console.log(this.$route.params.id);
       // let data1 = document.getElementsByTagName("input")[3].value
       // let data2 = document.getElementsByTagName("input")[4].value
       // const dataSend ={webUrl:data1,listName:data2}
